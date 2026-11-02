@@ -117,5 +117,5 @@ site has no real brand system, pending Doug's answer on brand assets.
 
 ## Links
 
-- Repo: (not yet created)
+- Repo: https://github.com/WebVybe/client-dougdenton (public)
 - Figma (if Path A): n/a
