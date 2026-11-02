@@ -1,0 +1,3 @@
+# Real client site, not a portfolio demo -- should be crawlable once live.
+User-agent: *
+Allow: /

@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+
+  /* Doug Denton brand palette -- trustworthy navy (the court-side
+     professional read, fits "I've strung for Nadal and Serena") paired
+     with a single tennis-ball chartreuse accent. The current site has no
+     real brand system at all, so this is a proposed identity, not a
+     carried-over one -- confirm with Doug before treating it as locked.
+     No hardcoded hex values outside this token block. */
+  --color-navy: #16304a;
+  --color-navy-deep: #0d1f30;
+  --color-ace: #c9d92e;
+  --color-ace-deep: #8f9a1f;
+  --color-cloud: #eef1ec;
+  --color-paper: #f8faf7;
+  --color-slate: #55645c;
+  --color-ink: #111814;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-paper);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background: var(--color-ace);
+  color: var(--color-navy-deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ace-deep);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@layer components {
+  .btn,
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    padding: 0.8rem 1.65rem;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+  .btn:active,
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: translateY(0);
+  }
+  .btn-primary {
+    background: var(--color-navy);
+    color: #fff;
+    box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--color-navy) 55%, transparent);
+  }
+  .btn-primary:hover {
+    background: var(--color-navy-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -8px color-mix(in srgb, var(--color-navy) 60%, transparent);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-navy);
+    border: 1px solid color-mix(in srgb, var(--color-navy) 35%, transparent);
+  }
+  .btn-secondary:hover {
+    border-color: var(--color-navy);
+    background: color-mix(in srgb, var(--color-navy) 6%, transparent);
+    transform: translateY(-2px);
+  }
+  .nav-link {
+    position: relative;
+    padding-bottom: 0.25rem;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--color-ace);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 200ms ease;
+  }
+  .nav-link:hover::after,
+  .nav-link.is-active::after {
+    transform: scaleX(1);
+  }
+  .eyebrow {
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ace-deep);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    background: var(--color-ace);
+    color: var(--color-navy-deep);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+  }
+  /* Honest "not real yet" marker -- used on placeholder pricing/contact
+     info/testimonials so nobody mistakes a placeholder for a real value
+     before Doug reviews it. */
+  .placeholder-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 6px;
+    border: 1px dashed color-mix(in srgb, var(--color-slate) 50%, transparent);
+    background: color-mix(in srgb, var(--color-ace) 12%, transparent);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--color-slate);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-transition {
+  animation: page-in 320ms ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+}
